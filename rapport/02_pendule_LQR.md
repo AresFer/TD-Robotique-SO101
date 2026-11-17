@@ -14,9 +14,9 @@ Code : [`partie1_pendule/q3_lqr.py`](../partie1_pendule/q3_lqr.py),
 
 Le LQR cherche la commande $u = -Kx$ qui minimise
 
-$$
+```math
 J = \int_0^\infty \left( x^T Q x + u^T R u \right) dt
-$$
+```
 
 pour le modèle linéarisé $\dot x = Ax + Bu$ du [chapitre 1](01_pendule_PID.md#11-équations).
 La solution passe par l'équation de Riccati algébrique :
@@ -42,9 +42,9 @@ non linéaire pyro (`ctl + PenduleRotatifEdukit()`, `compute_trajectory`).
 
 Réglage nominal : $Q = \mathrm{diag}(q_\theta, q_\alpha, q_{\dot\theta}, q_{\dot\alpha}) = \mathrm{diag}(100, 100, 1, 1)$, $R = 1$ :
 
-$$
+```math
 K = [-10.0,\ 253.3,\ -7.34,\ 33.05] \qquad \text{pôles : } -7.50 \pm 0.30j,\ -2.28 \pm 2.17j
-$$
+```
 
 Les signes de $K$ sont **les mêmes que ceux du double PID EDUKIT** $[-15, 225, -7.5, 22.5]$ :
 le firmware est un retour d'état réglé à la main, le LQR le règle par optimisation.

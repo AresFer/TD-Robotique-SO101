@@ -16,21 +16,21 @@ Code : [`partie2_so101/lqr_etoile.py`](../partie2_so101/lqr_etoile.py) (nouveau)
 
 Les servos acceptent une **position**. On modélise chaque articulation par $\ddot q = u$ :
 
-$$
+```math
 x = \begin{bmatrix} q_{1..6} \\ \dot q_{1..6} \end{bmatrix}, \quad
 A = \begin{bmatrix} 0 & I_6 \\ 0 & 0 \end{bmatrix}, \quad
 B = \begin{bmatrix} 0 \\ I_6 \end{bmatrix}, \quad
 u = K\,(x_{ref}(t) - x) + \ddot q_{ref}(t)
-$$
+```
 
 $K$ est calculé par pyro (`synthesize_lqr_controller`) à partir des matrices $Q$ (12×12) et
 $R$ (6×6) écrites **en clair** dans nos scripts. Comme $Q$ et $R$ sont diagonales, le problème
 se découple : pour chaque articulation, avec $Q = \mathrm{diag}(q_p, q_v)$ et $R = r$ :
 
-$$
+```math
 k_p = \sqrt{q_p/r}, \qquad k_d = \sqrt{q_v/r + 2\sqrt{q_p/r}}, \qquad
 \omega_n = (q_p/r)^{1/4}, \qquad \zeta = \frac{k_d}{2\,\omega_n}
-$$
+```
 
 Nos scripts utilisent $q_p = 81$, $q_v = 1$, $r = 1$ : **K = [9, 4.359]**, $\omega_n$ = 3 rad/s,
 $\zeta$ = 0.73 (vérifié : c'est la matrice K affichée par les scripts).
@@ -55,9 +55,9 @@ accélération initiale $k_p \cdot \Delta q$ (9 rad/s² par radian d'écart) : v
 déplacement. Nos scripts génèrent donc une **consigne** $q_{ref}(t)$ avec le profil polynomial
 $s(\tau) = 3\tau^2 - 2\tau^3$ (vitesse nulle aux extrémités), de durée
 
-$$
+```math
 T = \max\left(0.3,\ \frac{1.5\,D}{v_{max}},\ \sqrt{\frac{6\,D}{a_{max}}}\right)
-$$
+```
 
 car ce profil atteint une vitesse maximale $1.5D/T$ et une accélération maximale $6D/T^2$.
 Avec l'anticipation $\ddot q_{ref}$, le LQR ne corrige plus que les écarts : il sert de

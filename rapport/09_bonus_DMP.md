@@ -15,13 +15,13 @@ Code : [`partie2_so101/dmp.py`](../partie2_so101/dmp.py), étude
 Une DMP est un **ressort-amortisseur critique** vers le but $g$, déformé par un **terme de
 forçage** appris sur une démonstration :
 
-$$
+```math
 \tau\dot z = \alpha_z\big(\beta_z(g - y) - z\big) + f(x), \qquad \tau\dot y = z, \qquad \tau\dot x = -\alpha_x x
-$$
+```
 
-$$
+```math
 f(x) = \frac{\sum_i \psi_i(x)\,w_i}{\sum_i \psi_i(x)}\; x\,(g - y_0), \qquad \psi_i(x) = e^{-h_i (x - c_i)^2}
-$$
+```
 
 * $x$ est une « horloge » qui décroît de 1 à 0 : $f$ s'éteint, **la convergence vers $g$ est
   garantie** quelle que soit la démonstration ($\alpha_z = 25$, $\beta_z = \alpha_z/4$ : amortissement critique) ;

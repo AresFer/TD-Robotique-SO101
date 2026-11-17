@@ -21,18 +21,18 @@ Le firmware EDUKIT commande le moteur pas-à-pas **en accélération** (fonction
 comme entrée, $u = \ddot\theta$. Avec $\alpha$ l'angle du pendule mesuré depuis la verticale
 haute, Lagrange donne (tige + masse en bout, bras de rotor $r$) :
 
-$$
+```math
 \ddot\alpha = \omega_g^2 \sin\alpha + \omega_r^2 \cos\alpha \; u + \dot\theta^2 \sin\alpha\cos\alpha - \gamma\,\dot\alpha
 \qquad
 \omega_g^2 = \frac{m g l_c}{J},\quad \omega_r^2 = \frac{m r l_c}{J},\quad \gamma = \frac{c}{J}
-$$
+```
 
 Linéarisé autour de $\alpha = 0$, avec $x = [\theta,\ \alpha,\ \dot\theta,\ \dot\alpha]^T$ :
 
-$$
+```math
 \dot x = \underbrace{\begin{bmatrix}0&0&1&0\\0&0&0&1\\0&0&0&0\\0&\omega_g^2&0&-\gamma\end{bmatrix}}_{A} x
 + \underbrace{\begin{bmatrix}0\\0\\1\\ \omega_r^2\end{bmatrix}}_{B} u
-$$
+```
 
 C'est exactement la structure « $y = Ax + Bu$ » demandée par le TD. Valeurs utilisées
 (Tutorial 5 du guide EDUKIT, pendule en haut) : $\omega_g^2 = 55.85\ \text{rad}^2/\text{s}^2$,
@@ -86,9 +86,9 @@ la troncature `(int)` des micro-pas du sketch Arduino.
 échantillon.** Si la boucle tourne à la période $\Delta t$, la vitesse du rotor vaut
 $\dot\theta \approx \text{move}/\Delta t$, donc son accélération :
 
-$$
+```math
 \ddot\theta \approx \frac{K_P\,\dot e + 1000\,K_I\,e}{\Delta t}
-$$
+```
 
 Vis-à-vis de la physique (le pendule réagit à $\ddot\theta$), **`K_P` joue le rôle d'un gain
 dérivé et `K_I` celui d'un gain proportionnel**, et les deux sont divisés par $\Delta t$.
