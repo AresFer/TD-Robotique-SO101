@@ -1,0 +1,12 @@
+# Simulation et figures du dépôt (Python 3.10+)
+numpy
+scipy
+matplotlib
+mujoco>=3.2
+pillow
+roboticstoolbox-python      # utilisé par outils/lerobot_shim si lerobot-kinematics n'est pas compilé
+spatialmath-python
+pyro @ git+https://github.com/SherbyRobotics/pyro
+# Sur le vrai bras, en plus :
+#   lerobot-kinematics (pip install -e . dans le clone https://github.com/box2ai-robotics/lerobot-kinematics)
+#   lerobot, feetech-servo-sdk (scservo_sdk)

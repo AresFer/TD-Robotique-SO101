@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.banc/
+MUJOCO_LOG.TXT
+.ipynb_checkpoints/
+.DS_Store
