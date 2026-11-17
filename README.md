@@ -1,6 +1,6 @@
 # TD Robotique — PID, LQR, A*, RRT, DMP sur pendule EDUKIT et bras LeRobot SO-101
 
-**Binôme :** *Nom Prénom 1* — *Nom Prénom 2* · **Année :** 2025-2026 ·
+**FERHANI - KULASINGAM - PREVOST - ATIG - BACHIRI - EL KHAMLICHI**  · **Année :** 2025-2026 ·
 **Robots :** pendule inversé rotatif STEVAL-EDUKIT01, bras LeRobot SO-101 (6 DDL)
 
 <p align="center">
