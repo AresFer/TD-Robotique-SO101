@@ -70,9 +70,3 @@ Chaque script écrit ses figures dans `figures/` et ses chiffres dans un fichier
 (les tableaux du rapport en sont extraits). Les durées de planification A* varient de ±10 %
 selon la machine ; les durées des mouvements simulés peuvent varier de quelques pour cent d'une
 exécution à l'autre (chemin A* légèrement différent).
-
-## 5. Outils d'IA
-
-Le sujet autorise les outils d'IA générative. Nous les avons utilisés pour structurer le dépôt,
-écrire les scripts d'étude et le banc de simulation, et relire le code ; les choix, les essais
-sur le vrai bras et la validation des résultats restent les nôtres.
