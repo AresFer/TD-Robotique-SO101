@@ -175,8 +175,7 @@ ax[0].set_xlabel("t (s)")
 ax[0].set_ylabel("rad")
 ax[0].legend(fontsize=8)
 for j, idx in enumerate([0, 60, 150, 600]):
-    lines = rob5.forward_kinematic_lines(tr5.x[idx])[0]
-    pts = lines[0]
+    pts = rob5.forward_kinematic_lines(tr5.x[idx])[0][1]      # [0] = sol, [1] = bras
     ax[1].plot(pts[:, 0], pts[:, 1], "o-", color=C[j], ms=3, label=f"t = {tr5.t[idx]:.1f} s")
 E5 = np.array([rob5.forward_kinematic_effector(q) for q in tr5.x])
 ax[1].plot(E5[:, 0], E5[:, 1], ":", color=GRIS)
@@ -210,7 +209,7 @@ a.legend()
 a3 = fig.add_subplot(1, 2, 2, projection="3d")
 a3.plot(E3[:, 0], E3[:, 1], E3[:, 2], color=C[0])
 for j, idx in enumerate([0, 300, 2000]):
-    pts = rob3.forward_kinematic_lines(tr3.x[idx, :3])[0][0]
+    pts = rob3.forward_kinematic_lines(tr3.x[idx, :3])[0][1]
     a3.plot(pts[:, 0], pts[:, 1], pts[:, 2], "o-", color=C[j + 1], ms=3)
 a3.scatter(*epid.rbar, color=C[7], s=80, marker="*")
 a3.set_title("Trajectoire 3D et postures")
@@ -257,7 +256,7 @@ fig, a = plt.subplots(figsize=(5.5, 5.5))
 a.plot(Sa[:, 0], Sa[:, 1], "--", color=GRIS, label="étoile visée")
 a.plot(E[:, 0], E[:, 1], color=C[0], label="effecteur (IK + couple calculé + LQR)")
 for idx in np.linspace(0, len(X) - 1, 6).astype(int):
-    L = rob.forward_kinematic_lines(X[idx, :2])[0][0]
+    L = rob.forward_kinematic_lines(X[idx, :2])[0][1]
     a.plot(L[:, 0], L[:, 1], "o-", color=C[1], alpha=0.35, ms=3)
 a.set_aspect("equal")
 a.legend(fontsize=8, loc="lower left")
@@ -273,7 +272,7 @@ try:
         Ek = np.array([rob.forward_kinematic_effector(q) for q in X[:idx + 1:10, :2]])
         if len(Ek):
             a.plot(Ek[:, 0], Ek[:, 1], color=C[0], lw=2)
-        L = rob.forward_kinematic_lines(X[idx, :2])[0][0]
+        L = rob.forward_kinematic_lines(X[idx, :2])[0][1]
         a.plot(L[:, 0], L[:, 1], "o-", color=C[1], lw=3, ms=5)
         a.set_xlim(-0.1, 0.8)
         a.set_ylim(-0.2, 0.7)
