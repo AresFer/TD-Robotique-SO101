@@ -96,6 +96,46 @@ python examples/pick_place_astar.py                   # MODE = "teach", puis "si
 **Toutes les figures, sans bras** : voir [méthodologie § 4](rapport/00_methodologie.md#4-reproduire-toutes-les-figures)
 (`pip install -r requirements.txt`, puis les scripts `partie1_pendule/*.py` et `simulations/s*.py`).
 
+## Sur le vrai bras : photos et vidéos des essais
+
+Les figures du compte rendu viennent en grande partie de la simulation et du jumeau numérique.
+Cette section montre **le matériel réel** sur lequel nos scripts ont tourné en salle de TD.
+
+### Le SO-101 en mouvement — suivi de trajectoire par LQR
+
+<p align="center">
+  <img src="media/videos/so101_lqr_reel.gif" width="30%" alt="Bras SO-101 réel piloté par LQR">
+</p>
+<p align="center"><i>Essai réel (accéléré ×2.5) · <a href="media/videos/so101_lqr_reel.mp4">vidéo complète, 35 s</a></i></p>
+
+Le bras part de sa position de repos, descend vers la table pour aller chercher une position
+cible, puis revient. À chaque pas, l'IK (`lerobot_IK`) donne la configuration articulaire visée
+et le **LQR synthétisé avec pyro** calcule la commande qui y amène le bras en limitant les
+à-coups : le mouvement est fluide, sans les dépassements qu'on observe avec un PID mal réglé.
+
+Ce qu'il faut regarder :
+
+* **la fluidité** : pas d'oscillation à l'arrivée, ce qui est le rôle du compromis entre les
+  matrices Q (précision) et R (effort) — voir [Q6](rapport/05_LQR_A_B_etoile.md) ;
+* **la lenteur relative** par rapport à la simulation : elle vient de la boucle réelle à ~31 Hz
+  au lieu de 50 Hz, analysée en [Q8](rapport/07_evitement_obstacles.md#1-ce-qui-est-réellement-fait-sur-le-bras).
+
+### Le montage
+
+<p align="center">
+  <img src="media/photos/so101_vue_cote.jpg" width="40%" alt="SO-101 vue de côté">
+  <img src="media/photos/so101_vue_dessus.jpg" width="40%" alt="SO-101 vue de dessus">
+</p>
+<p align="center"><i>SO-101 (6 DDL, servos à bus série) · vue de côté et vue de dessus</i></p>
+
+* **6 servomoteurs** chaînés sur un même bus série (câbles rouge/noir/blanc qui passent d'un
+  servo au suivant) : base, épaule, coude, poignet (flexion), poignet (rotation), pince.
+* **La carte rouge** est le contrôleur de bus : elle reçoit les consignes du PC en USB
+  (port `COM12`) et les transmet aux servos. Le bornier bleu sert à l'alimentation des moteurs.
+* La **pince** est le 6e servo ; c'est elle qui s'ouvre et se ferme lors du pick & place (Q7, Q8).
+
+D'autres photos et vidéos : **[page média](media/README.md)**.
+
 ## Références
 
 * A. Girard *et al.*, **pyro** — https://github.com/SherbyRobotics/pyro
